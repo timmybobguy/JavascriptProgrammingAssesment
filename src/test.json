@@ -1,24 +1,54 @@
-{	
-	"matches": [
-		{
-			"year": "2018", 
-			"month": "APRIL",
-			"day": "5",
-			"hour": "13", 
-			"minute": "0",
-			"poolName": "A",
-			"teamA": "Jamaica",
-			"teamB": "Fiji"
-		},
-		{
-			"year": "2018", 
-			"month": "APRIL",
-			"day": "5",
-			"hour": "15", 
-			"minute": "0",
-			"poolName": "B",
-			"teamA": "England",
-			"teamB": "Scotland"
-		}
+{
+	"sports": [
+		"Netball": [
+			"venue": "Gold Coast Convention and Exhibition Centre",
+			"matches": [
+				{
+					"year": "2018", 
+					"month": "APRIL",
+					"day": "5",
+					"hour": "13", 
+					"minute": "0",
+					"poolName": "A",
+					"teamA": "Jamaica",
+					"teamB": "Fiji"
+				},
+				{
+					"year": "2018", 
+					"month": "APRIL",
+					"day": "5",
+					"hour": "15", 
+					"minute": "0",
+					"poolName": "B",
+					"teamA": "England",
+					"teamB": "Scotland"
+				}
+			]
+		]
+		"Men\'s Rugby Sevens": [
+			"venue": "Robina Stadium",
+			"matches": [
+				{
+					"year": "2018", 
+					"month": "APRIL",
+					"day": "14",
+					"hour": "9", 
+					"minute": "30",
+					"poolName": "B",
+					"teamA": "Australia",
+					"teamB": "Samoa"
+				},
+				{
+					"year": "2018", 
+					"month": "APRIL",
+					"day": "14",
+					"hour": "9", 
+					"minute": "30",
+					"poolName": "B",
+					"teamA": "England",
+					"teamB": "Jamaica"
+				}
+			]
+		]
 	]
 }
