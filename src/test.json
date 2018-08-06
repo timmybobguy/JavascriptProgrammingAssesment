@@ -1,0 +1,24 @@
+{	
+	"matches": [
+		{
+			"year": "2018", 
+			"month": "APRIL",
+			"day": "5",
+			"hour": "13", 
+			"minute": "0",
+			"poolName": "A",
+			"teamA": "Jamaica",
+			"teamB": "Fiji"
+		},
+		{
+			"year": "2018", 
+			"month": "APRIL",
+			"day": "5",
+			"hour": "15", 
+			"minute": "0",
+			"poolName": "B",
+			"teamA": "England",
+			"teamB": "Scotland"
+		}
+	]
+}
