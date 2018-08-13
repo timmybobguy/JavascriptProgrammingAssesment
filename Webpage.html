@@ -1,45 +1,76 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<title> This is the name </title>
+	<meta charset="utf-8">
+    <!-- Source files here... -->
+    <script src="src/SetExtensions.js"></script>
+    <script src="src/View.js"></script>
+    <script src="src/Team.js"></script>
+    <script src="src/Match.js"></script>
+    <script src="src/Pool.js"></script>
+    <script src="src/Sport.js"></script>
+    <script src="src/Tournament.js"></script>
+    <script src="src/Controller.js"></script>
+    <script src="src/addPoolResults.js"></script>
+    <script src="src/shortNames.js"></script>
+	<script src="src/HTMLfunctions.js"></script>
+</head>
 <body>
+	<button onclick="myFunction()">Try it</button>
+	<button onclick="makeNewLine()">Make new line</button>
 <script>
-var centre = function (original) {
-  let result = original
-  while (result.length < 6){
-    if (result.length%2 ){
-      result += ' '
 
-    }
-    else {
-      result = ' ' + result
-    }
-  }
-  return result
+var the2018Games
+the2018Games = Controller.setup()
+console.log( the2018Games ) 
 
+function makeNewLine() {
+	var br = document.createElement('br')
+	document.body.appendChild(br)
+	br = document.createElement('br')
+	document.body.appendChild(br)
+}
+	
+function makeTable (appendTo) {
+  var newTable 
+  newTable = document.createElement('table')
+  newTable.setAttribute('border', '1')
+  appendTo.appendChild(newTable)
+  return newTable
 }
 
-let padded = centre('a')
-console.log('>', padded , '<')
+function addTableHeaders (theTable, ...allHeaders) {
+  var newTableRow = document.createElement('tr')
+  var newTableHeader
+  for (let aHeader of allHeaders) {
+    newTableHeader = document.createElement('th')
+    newTableHeader.innerHTML = aHeader
+    newTableRow.appendChild(newTableHeader)
+  }
+    theTable.appendChild(newTableRow)
+}
 
-padded = centre('bb')
-console.log('>', padded , '<')
 
-padded = centre('ccc')
-console.log('>', padded , '<')
+function addTableData (theTable, ...allData) {
+  var newTableRow = document.createElement('tr')
+  var newTableData
+  for (let data of allData) {
+    newTableData = document.createElement('td')
+    newTableData.innerHTML = data
+    newTableRow.appendChild(newTableData)
+  }
+    theTable.appendChild(newTableRow)
+}
 
-padded = centre('dddd')
-console.log('>', padded , '<')
-
-padded = centre('eeeee')
-console.log('>', padded , '<')
-
-padded = centre('ffffff')
-console.log('>', padded , '<')
-
-padded = centre('ggggggg')
-console.log('>', padded , '<')
-
-function test() {
-  var thisIsATest
+// called from a button click or load of a document
+function myFunction () { // eslint-disable-line no-unused-vars
+  var theTable
+  theTable = makeTable(document.body)
+  addTableHeaders(theTable, 'ID', 'Grade')
+  addTableData(theTable, '123123', '100')
+  addTableData(theTable, '987654', '56')
+  addTableData(theTable, '1231234', '34')
 }
 
 </script>
