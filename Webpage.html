@@ -4,6 +4,7 @@
 	<title> This is the name </title>
 	<meta charset="utf-8">
     <!-- Source files here... -->
+		<script type="text/javascript" src="src/test.json"></script>
     <script src="src/SetExtensions.js"></script>
     <script src="src/View.js"></script>
     <script src="src/Team.js"></script>
@@ -14,26 +15,36 @@
     <script src="src/Controller.js"></script>
     <script src="src/addPoolResults.js"></script>
     <script src="src/shortNames.js"></script>
-	<script src="src/HTMLfunctions.js"></script>
 </head>
 <body>
 	<button onclick="myFunction()">Try it</button>
 	<button onclick="makeNewLine()">Make new line</button>
+
+	<div id="div1">
+		<p> test </p>
+	</div>
+
 <script>
 
 var the2018Games
 the2018Games = Controller.setup()
-console.log( the2018Games ) 
+console.log( the2018Games )
 
+
+
+
+
+
+/*
 function makeNewLine() {
 	var br = document.createElement('br')
 	document.body.appendChild(br)
 	br = document.createElement('br')
 	document.body.appendChild(br)
 }
-	
+
 function makeTable (appendTo) {
-  var newTable 
+  var newTable
   newTable = document.createElement('table')
   newTable.setAttribute('border', '1')
   appendTo.appendChild(newTable)
@@ -72,6 +83,7 @@ function myFunction () { // eslint-disable-line no-unused-vars
   addTableData(theTable, '987654', '56')
   addTableData(theTable, '1231234', '34')
 }
+*/
 
 </script>
 </body>

@@ -1,13 +1,42 @@
 class Controller {
   static setup () {
-    const APRIL = 3 // JAN = 0!  
+    const APRIL = 3 // JAN = 0!
     let the2018Games = new Tournament('Gold Coast 2018 Commonwealth Games')
     let aSport = the2018Games.addSport('Netball', 'Gold Coast Convention and Exhibition Centre')
-    
+
     // -----------------------------------------------------------------------------
+    var local_data = data;
+    console.log(local_data);
+    var para = document.createElement("p");
+    var node = document.createTextNode(JSON.stringify(local_data));
+    para.appendChild(node);
+    var element = document.getElementById("div1");
+    element.appendChild(para);
+    var result = "";
+
+    for (var i = 0; i < local_data.matches.length; i++) {
+    	//result += local_data.matches[i].year + ", "
+    	//result += local_data.matches[i].month + ",  "
+    	//result += local_data.matches[i].day + ",  "
+    	//result += local_data.matches[i].hour + ", "
+    	//result += local_data.matches[i].minute + ", "
+  		//result += "'" + local_data.matches[i].poolName + "', "
+  		//result += "'" + local_data.matches[i].teamNameA + "', "
+  		//result += "'" + local_data.matches[i].teamNameB + "'"
+  		//aSport.addMatch(result)
+      console.log(result)
+      aSport.addMatch(local_data.matches[i].year, local_data.matches[i].month, local_data.matches[i].day, local_data.matches[i].hour, local_data.matches[i].minute, local_data.matches[i].poolName, local_data.matches[i].teamNameA, local_data.matches[i].teamNameB)
+  		result = ""
+      //`${this.myPool} ${this.myTeamA} vs ${this.myTeamB} ${this.scoreA} - ${this.scoreB}`
+  	}
+  	console.log(result)
+
+
+    //aSport.addMatch(appendInput)
+    /*
     aSport.addMatch(2018, APRIL,  5, 13,  0, 'A', 'Jamaica', 'Fiji')
     aSport.addMatch(2018, APRIL,  5, 15,  0, 'B', 'England', 'Scotland')
-    aSport.addMatch(2018, APRIL,  5, 18, 30, 'B', 'New Zealand', 'Uganda') 
+    aSport.addMatch(2018, APRIL,  5, 18, 30, 'B', 'New Zealand', 'Uganda')
     aSport.addMatch(2018, APRIL,  5, 20, 30, 'A', 'Australia', 'Northern Ireland')
 
     aSport.addMatch(2018, APRIL,  6, 13,  0, 'B', 'Wales', 'New Zealand')
@@ -41,8 +70,9 @@ class Controller {
     aSport.addMatch(2018, APRIL, 11, 16,  0, 'B', 'Uganda', 'Scotland')
     aSport.addMatch(2018, APRIL, 11, 19,  0, 'B', 'Malawi', 'Wales')
     aSport.addMatch(2018, APRIL, 11, 21,  0, 'A', 'Australia', 'Jamaica')
+    */
 
-    
+
     // -----------------------------------------------------------------------------
     aSport = the2018Games.addSport('Men\'s Rugby Sevens', 'Robina Stadium')
 
