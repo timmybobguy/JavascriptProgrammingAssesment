@@ -35,3 +35,18 @@ function addTableData (theTable, ...allData) {
   }
     theTable.appendChild(newTableRow)
 }
+
+function makeSelect(appendTo) {
+  var newSelect
+  newSelect = document.createElement('select')
+  appendTo.appendChild(newSelect)
+  return newSelect
+}
+
+function addSelectOption(theSelect, ...allData) {
+  for (let data of allData) {
+    var newSelectData = document.createElement('option')
+    newSelectData.innerHTML = data
+  }
+  theSelect.appendChild(newSelectData)
+}
