@@ -47,6 +47,7 @@ function addSelectOption(theSelect, ...allData) {
   for (let data of allData) {
     var newSelectData = document.createElement('option')
     newSelectData.innerHTML = data
+    newSelectData.value = data
   }
   theSelect.appendChild(newSelectData)
 }
