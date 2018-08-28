@@ -57,18 +57,20 @@ function onLoad() {
 	theSelect = makeSelect(document.body.childNodes[3], "sportSelector")
 	addSelectOption(theSelect, "All Sports", 'special')
     for (var x = 0; x < the2018Games.allMySports.length; x++) {
-	  addSelectOption(theSelect, the2018Games.allMySports[x].name, x)
+	  addSelectOption(theSelect, the2018Games.allMySports[x].name, x, the2018Games.allMySports[x].name)
     }
 	theSelect2 = makeSelect(document.body.childNodes[3], "secondSelector")
-	addSelectOption(theSelect2, "Matches", 0)
-	addSelectOption(theSelect2, "Pools", 1)
-	addSelectOption(theSelect2, "Teams", 2)
+	addSelectOption(theSelect2, "Matches", 0, "Matches")
+	addSelectOption(theSelect2, "Pools", 1, "Pools")
+	addSelectOption(theSelect2, "Teams", 2, "Teams")
 	theButton = makeButton(document.body.childNodes[3], 'Click once decision is made', 'secondFunction()', 'button1')
 }
 function secondFunction() {
-
-
-
+	sport = document.getElementById("sportSelector").value
+	selection = document.getElementById("secondSelector").value
+	sportNumber = document.getElementsByName(sport)[0].id
+	selectionNumber = document.getElementsByName(selection)[0].id
+	console.log(sportNumber, selectionNumber)
 
 }
 

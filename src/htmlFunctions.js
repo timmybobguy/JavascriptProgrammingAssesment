@@ -45,11 +45,12 @@ function makeSelect(appendTo, id) {
   return newSelect
 }
 
-function addSelectOption(theSelect, theData, id) {
+function addSelectOption(theSelect, theData, id, name) {
 	var newSelectData = document.createElement('option')
 	newSelectData.innerHTML = theData
 	newSelectData.value = theData
 	newSelectData.setAttribute("id", id)
+	newSelectData.setAttribute("name", name)
 	theSelect.appendChild(newSelectData)
 	/*
   for (let data of allData) {
