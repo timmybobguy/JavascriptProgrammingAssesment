@@ -66,12 +66,25 @@ function onLoad() {
 	theButton = makeButton(document.body.childNodes[3], 'Click once decision is made', 'secondFunction()', 'button1')
 }
 function secondFunction() {
-	sport = document.getElementById("sportSelector").value
-	selection = document.getElementById("secondSelector").value
+	sport = String(document.getElementById("sportSelector").value)
+	selection = String(document.getElementById("secondSelector").value)
 	sportNumber = document.getElementsByName(sport)[0].id
-	selectionNumber = document.getElementsByName(selection)[0].id
-	console.log(sportNumber, selectionNumber)
+	//selectionNumber = document.getElementsByName(selection)[0].id
+	//console.log(sportNumber, selectionNumber)
 
+	theTable = makeTable(document.body.childNodes[5])
+
+	if (selection === "Matches") {
+		addTableHeaders(theTable, "Pool", "Team A", "Team B", "Team A Score", "Team B Score", "Date of Match")
+		for (var i = 0; i < the2018Games.allMySports[sportNumber].allMyMatches.length; i++) {
+			addTableData(theTable, the2018Games.allMySports[sportNumber].allMyMatches[i].myPool.name, the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamA.name, the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamB.name, the2018Games.allMySports[sportNumber].allMyMatches[i].scoreA, the2018Games.allMySports[sportNumber].allMyMatches[i].scoreB, the2018Games.allMySports[sportNumber].allMyMatches[i].when)
+		}
+	} else if (selection === "Pools") {
+		addTableHeaders(theTable, "Pool name", "Pool Teams")
+		for (var i = 0; i < the2018games.allMySports[sportNumber].allMyPools.length; i++) {
+			//addTableData(theTable, the2018games.allMySports[sportNumber].allMyPools[i].name, the2018games.allMySports[sportNumber].allMyPools[i].allMyTeams
+		}
+	}
 }
 
 /*

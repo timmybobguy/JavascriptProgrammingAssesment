@@ -10,7 +10,7 @@ function makeTable (appendTo, id) {
   newTable = document.createElement('table')
   newTable.setAttribute('border', '1')
   appendTo.appendChild(newTable)
-	newSelect.setAttribute("id", id)
+	newTable.setAttribute("id", id)
   return newTable
 }
 
