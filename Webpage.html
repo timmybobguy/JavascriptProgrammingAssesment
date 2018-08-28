@@ -31,7 +31,7 @@
 </nav>
 
 <main>
-	<p> Test </p>
+
 </main>
 
 <aside>
@@ -48,6 +48,8 @@
 
 
 <script>
+
+
 
 var the2018Games
 the2018Games = Controller.setup()
@@ -66,23 +68,31 @@ function onLoad() {
 	theButton = makeButton(document.body.childNodes[3], 'Click once decision is made', 'secondFunction()', 'button1')
 }
 function secondFunction() {
+	document.body.childNodes[5].innerHTML = ""
 	sport = String(document.getElementById("sportSelector").value)
 	selection = String(document.getElementById("secondSelector").value)
 	sportNumber = document.getElementsByName(sport)[0].id
 	//selectionNumber = document.getElementsByName(selection)[0].id
 	//console.log(sportNumber, selectionNumber)
-
+	theTest = the2018Games.allMySports[sportNumber]
 	theTable = makeTable(document.body.childNodes[5])
 
 	if (selection === "Matches") {
 		addTableHeaders(theTable, "Pool", "Team A", "Team B", "Team A Score", "Team B Score", "Date of Match")
-		for (var i = 0; i < the2018Games.allMySports[sportNumber].allMyMatches.length; i++) {
-			addTableData(theTable, the2018Games.allMySports[sportNumber].allMyMatches[i].myPool.name, the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamA.name, the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamB.name, the2018Games.allMySports[sportNumber].allMyMatches[i].scoreA, the2018Games.allMySports[sportNumber].allMyMatches[i].scoreB, the2018Games.allMySports[sportNumber].allMyMatches[i].when)
+		for (var i = 0; i < theTest.allMyMatches.length; i++) {
+			addTableData(theTable, theTest.allMyMatches[i].myPool.name, theTest.allMyMatches[i].myTeamA.name, theTest.allMyMatches[i].myTeamB.name, theTest.allMyMatches[i].scoreA, theTest.allMyMatches[i].scoreB, theTest.allMyMatches[i].when)
 		}
 	} else if (selection === "Pools") {
 		addTableHeaders(theTable, "Pool name", "Pool Teams")
-		for (var i = 0; i < the2018games.allMySports[sportNumber].allMyPools.length; i++) {
-			//addTableData(theTable, the2018games.allMySports[sportNumber].allMyPools[i].name, the2018games.allMySports[sportNumber].allMyPools[i].allMyTeams
+		for (var i = 0; i < theTest.allMyPools.length; i++) {
+			for (var x = 0; x < theTest.allMyPools[i].allMyTeams.length; x++) {
+				addTableData(theTable, theTest.allMyPools[i].name, theTest.allMyPools[i].allMyTeams[x].name)
+			}
+		}
+	} else if (selection === "Teams") {
+		addTableHeaders(theTable, "Team name", "Matches won", "Matches lost", "Matches played", "Score for", "Score against")
+		for (var i = 0; i < theTest.allMyTeams.length; i++) {
+			addTableData(theTable, theTest.allMyTeams[i].name, theTest.allMyTeams[i].matchesWon, theTest.allMyTeams[i].matchesLost, theTest.allMyTeams[i].matchesPlayed, theTest.allMyTeams[i].scoreFor, theTest.allMyTeams[i].scoreAgainst)
 		}
 	}
 }
