@@ -36,10 +36,11 @@ function addTableData (theTable, ...allData) {
     theTable.appendChild(newTableRow)
 }
 
-function makeSelect(appendTo) {
+function makeSelect(appendTo, id) {
   var newSelect
   newSelect = document.createElement('select')
   appendTo.appendChild(newSelect)
+  newSelect.setAttribute("id", id)
   return newSelect
 }
 
@@ -50,4 +51,12 @@ function addSelectOption(theSelect, ...allData) {
     newSelectData.value = data
   }
   theSelect.appendChild(newSelectData)
+}
+function makeButton(appendTo, buttonText, buttonCommand) {
+  var newButton
+  newButton = document.createElement('button')
+  appendTo.appendChild(newButton)
+  newButton.setAttribute("onclick", buttonCommand)
+  newButton.innerHTML = buttonText
+  return newButton
 }
