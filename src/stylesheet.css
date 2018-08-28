@@ -26,8 +26,21 @@ header {
   padding: 40px;
 }
 footer {
-	grid-column: 1/3;
-  grid-row: 6;
+
 }
-
-
+#sportSelector {
+  grid-column: 2;
+  grid-row: 2;
+}
+#secondSelector {
+  grid-column: 2;
+  grid-row: 3;
+}
+#button1 {
+  grid-column: 1;
+  grid-row: 5;
+}
+#para1 {
+  grid-column: 1;
+  grid-row: 2/4;
+}

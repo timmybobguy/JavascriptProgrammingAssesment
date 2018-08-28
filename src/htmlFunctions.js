@@ -5,11 +5,12 @@ function makeNewLine() {
 	document.body.appendChild(br)
 }
 
-function makeTable (appendTo) {
+function makeTable (appendTo, id) {
   var newTable
   newTable = document.createElement('table')
   newTable.setAttribute('border', '1')
   appendTo.appendChild(newTable)
+	newSelect.setAttribute("id", id)
   return newTable
 }
 
@@ -44,19 +45,35 @@ function makeSelect(appendTo, id) {
   return newSelect
 }
 
-function addSelectOption(theSelect, ...allData) {
+function addSelectOption(theSelect, theData, id) {
+	var newSelectData = document.createElement('option')
+	newSelectData.innerHTML = theData
+	newSelectData.value = theData
+	newSelectData.setAttribute("id", id)
+	theSelect.appendChild(newSelectData)
+	/*
   for (let data of allData) {
     var newSelectData = document.createElement('option')
     newSelectData.innerHTML = data
     newSelectData.value = data
+		newSelectData.setAttribute("id", '0')
   }
   theSelect.appendChild(newSelectData)
+	*/
 }
-function makeButton(appendTo, buttonText, buttonCommand) {
+
+function makeButton(appendTo, buttonText, buttonCommand, id) {
   var newButton
   newButton = document.createElement('button')
   appendTo.appendChild(newButton)
   newButton.setAttribute("onclick", buttonCommand)
+	newButton.setAttribute("id", id)
   newButton.innerHTML = buttonText
   return newButton
+}
+
+function removeElement(elementId) {
+    // Removes an element from the document
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
 }
