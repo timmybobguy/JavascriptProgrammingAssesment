@@ -25,8 +25,8 @@
 	<h1>The 2018 Games</h1>
 </header>
 
-<button onclick="myFunction()">Click me</button>
-
+<!--<button onclick="myFunction()">Click me</button>-->
+<body onload="myFunction()">
 
 <script>
 
@@ -34,14 +34,27 @@ var the2018Games
 the2018Games = Controller.setup()
 console.log( the2018Games )
 
+function myFunction() {
+	theSelect = makeSelect(document.body, "test")
+    for (var x = 0; x < the2018Games.allMySports.length; x++) {
+	  addSelectOption(theSelect, the2018Games.allMySports[x].name) 
+    }
+	theButton = makeButton(document.body, 'Click once decision is made', 'myFunction1()')
+}
+function myFunction1() {
+	if (document.getElementById("test").value === "Netball") {
+		console.log('yes')
+	} else {
+		console.log('no')
+	}
+	console.log('test')
+}
 
 
 
 
 
-
-
-
+/*
 // called from a button click or load of a document
 function myFunction () { // eslint-disable-line no-unused-vars
   var theTable
@@ -57,6 +70,7 @@ function myFunction () { // eslint-disable-line no-unused-vars
 	addSelectOption(theSelect, 'Test3')
 
 }
+*/
 
 
 </script>
