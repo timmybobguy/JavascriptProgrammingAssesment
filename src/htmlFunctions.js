@@ -4,6 +4,12 @@ function makeNewLine() {
 	br = document.createElement('br')
 	document.body.appendChild(br)
 }
+function makeParagraph(appendTo, pText) {
+	var p = document.createElement('p')
+	appendTo.appendChild(p)
+	p.innerHTML = pText
+	return p
+}
 
 function makeTable (appendTo, id) {
   var newTable
