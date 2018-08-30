@@ -88,9 +88,10 @@ function secondFunction() {
 		if (sport === "All Sports") {
 			//sportNumber = the2018Games.allMySports[allSportsValue - 1]
 			theTest = the2018Games.allMySports[allSportsValue - 1]
+			paraText = theTest.name
+			makeParagraph(document.body.childNodes[5], paraText)
 		}
-		paraText = theTest.name
-		makeParagraph(document.body.childNodes[5], paraText)
+		
 		theTable = makeTable(document.body.childNodes[5])
 		
 		if (selection === "Matches") {
