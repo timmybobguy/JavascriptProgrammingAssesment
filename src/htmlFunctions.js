@@ -43,11 +43,12 @@ function addTableData (theTable, ...allData) {
     theTable.appendChild(newTableRow)
 }
 
-function makeSelect(appendTo, id) {
+function makeSelect(appendTo, id, onChange) {
   var newSelect
   newSelect = document.createElement('select')
   appendTo.appendChild(newSelect)
-  newSelect.setAttribute("id", id)
+	newSelect.setAttribute("id", id)
+  newSelect.setAttribute("onchange", onChange)
   return newSelect
 }
 
@@ -83,6 +84,15 @@ function removeElement(elementId) {
     // Removes an element from the document
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
+}
+
+function removeOptions(selectbox)
+{
+    var i;
+    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    {
+        selectbox.remove(i);
+    }
 }
 
 function makeInput(appendTo, id) {

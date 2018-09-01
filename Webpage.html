@@ -54,9 +54,9 @@ function onLoad() {
 	makeParagraph(document.body.childNodes[3], "Please select the options you want")
 	theSelect = makeSelect(document.body.childNodes[3], "sportSelector")
 	addSelectOption(theSelect, "All Sports", 'special')
-    for (var x = 0; x < the2018Games.allMySports.length; x++) {
+  for (var x = 0; x < the2018Games.allMySports.length; x++) {
 	  addSelectOption(theSelect, the2018Games.allMySports[x].name, x, the2018Games.allMySports[x].name)
-    }
+  }
 	theSelect2 = makeSelect(document.body.childNodes[3], "secondSelector")
 	addSelectOption(theSelect2, "Matches", 0, "Matches")
 	addSelectOption(theSelect2, "Pools", 1, "Pools")
@@ -65,10 +65,26 @@ function onLoad() {
 	makeParagraph(document.body.childNodes[7], "Search for teams and results etc.")
 	makeInput(document.body.childNodes[7], "searchBar")
 	//makeButton(document.body.childNodes[7], "Search", "searchFunction()", 'button2')
+
+	//Statistics menu
+	makeParagraph(document.body.childNodes[3], "Select the sport and team for statistics")
+	theSelect3 = makeSelect(document.body.childNodes[3], "statisticsSelector1", "statisticsFunction1()")
+	for (var x = 0; x < the2018Games.allMySports.length; x++) {
+	  addSelectOption(theSelect3, the2018Games.allMySports[x].name, x, the2018Games.allMySports[x].name)
+  }
+	theSelect4 = makeSelect(document.body.childNodes[3], "statisticsSelector2")
+
+}
+
+function statisticsFunction1() {
+	removeOptions(document.getElementById("statisticsSelector2"))
+	for (var i = 0; i < the2018Games.allMySports.length; i++) {
+		addSelectOption(document.getElementById("statisticsSelector2"), the2018Games.allMySports[i])
+	}
 }
 
 window.addEventListener('input', function (e) {
- //console.log("input event detected! coming from this element:", e.target);
+ //console.log("input event coming from this element:", e.target);
  searchFunction()
 
 }, false);
