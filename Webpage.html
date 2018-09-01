@@ -49,15 +49,6 @@
 
 <script>
 
-
-window.addEventListener('input', function (e) {
- //console.log("input event detected! coming from this element:", e.target);
- searchFunction()
-
-}, false);
-
-
-
 var the2018Games
 the2018Games = Controller.setup()
 console.log( the2018Games )
@@ -73,9 +64,17 @@ function onLoad() {
 	addSelectOption(theSelect2, "Pools", 1, "Pools")
 	addSelectOption(theSelect2, "Teams", 2, "Teams")
 	makeButton(document.body.childNodes[3], 'Update table', 'secondFunction()', 'button1')
+	makeParagraph(document.body.childNodes[7], "Use this to search for teams, scores etc.")
 	makeInput(document.body.childNodes[7], "searchBar")
 	//makeButton(document.body.childNodes[7], "Search", "searchFunction()", 'button2')
 }
+
+window.addEventListener('input', function (e) {
+ //console.log("input event detected! coming from this element:", e.target);
+ searchFunction()
+
+}, false);
+
 function searchFunction() {
 	var searchString = document.getElementById('searchBar').value
   for (var i = 0; i < document.querySelectorAll('td').length; i++) {
