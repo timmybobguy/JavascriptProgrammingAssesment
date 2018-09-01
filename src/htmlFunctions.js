@@ -84,3 +84,11 @@ function removeElement(elementId) {
     var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
 }
+
+function makeInput(appendTo, id) {
+	var newInput = document.createElement('input')
+	appendTo.appendChild(newInput)
+	newInput.setAttribute("type", "text")
+	newInput.setAttribute("id", id)
+	return newInput
+}

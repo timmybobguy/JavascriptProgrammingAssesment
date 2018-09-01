@@ -50,6 +50,13 @@
 <script>
 
 
+window.addEventListener('input', function (e) {
+ //console.log("input event detected! coming from this element:", e.target);
+ searchFunction()
+
+}, false);
+
+
 
 var the2018Games
 the2018Games = Controller.setup()
@@ -65,24 +72,36 @@ function onLoad() {
 	addSelectOption(theSelect2, "Matches", 0, "Matches")
 	addSelectOption(theSelect2, "Pools", 1, "Pools")
 	addSelectOption(theSelect2, "Teams", 2, "Teams")
-	theButton = makeButton(document.body.childNodes[3], 'Update table', 'secondFunction()', 'button1')
+	makeButton(document.body.childNodes[3], 'Update table', 'secondFunction()', 'button1')
+	makeInput(document.body.childNodes[7], "searchBar")
+	//makeButton(document.body.childNodes[7], "Search", "searchFunction()", 'button2')
+}
+function searchFunction() {
+	var searchString = document.getElementById('searchBar').value
+  for (var i = 0; i < document.querySelectorAll('td').length; i++) {
+  	if (document.querySelectorAll('td')[i].textContent.toUpperCase() === searchString.toUpperCase()) {
+			document.querySelectorAll('td')[i].bgColor = "red"
+  	} else {
+			document.querySelectorAll('td')[i].bgColor = "white"
+  	}
+  }
 }
 function secondFunction() {
 	document.body.childNodes[5].innerHTML = ""
 	sport = String(document.getElementById("sportSelector").value)
 	selection = String(document.getElementById("secondSelector").value)
-	
+
 	//selectionNumber = document.getElementsByName(selection)[0].id
 	//console.log(sportNumber, selectionNumber)
-	
-	
+
+
 	allSportsValue = 1
 	if (sport === "All Sports") {
 		allSportsValue = the2018Games.allMySports.length
 	} else {
 		sportNumber = document.getElementsByName(sport)[0].id
 		theTest = the2018Games.allMySports[sportNumber]
-		
+
 	}
 	while (allSportsValue > 0) {
 		if (sport === "All Sports") {
@@ -91,9 +110,9 @@ function secondFunction() {
 			paraText = theTest.name
 			makeParagraph(document.body.childNodes[5], paraText)
 		}
-		
+
 		theTable = makeTable(document.body.childNodes[5])
-		
+
 		if (selection === "Matches") {
 			addTableHeaders(theTable, "Pool", "Team A", "Team B", "Team A Score", "Team B Score", "Date of Match")
 			for (var i = 0; i < theTest.allMyMatches.length; i++) {
