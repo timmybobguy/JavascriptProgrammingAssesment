@@ -27,15 +27,12 @@
 </header>
 
 <nav>
-	<p id="para1"> Please select the options you want </p>
 </nav>
 
 <main>
-
 </main>
 
 <aside>
-
 </aside>
 
 <footer>Footer</footer>
@@ -54,6 +51,7 @@ the2018Games = Controller.setup()
 console.log( the2018Games )
 
 function onLoad() {
+	makeParagraph(document.body.childNodes[3], "Please select the options you want")
 	theSelect = makeSelect(document.body.childNodes[3], "sportSelector")
 	addSelectOption(theSelect, "All Sports", 'special')
     for (var x = 0; x < the2018Games.allMySports.length; x++) {
@@ -64,7 +62,7 @@ function onLoad() {
 	addSelectOption(theSelect2, "Pools", 1, "Pools")
 	addSelectOption(theSelect2, "Teams", 2, "Teams")
 	makeButton(document.body.childNodes[3], 'Update table', 'secondFunction()', 'button1')
-	makeParagraph(document.body.childNodes[7], "Use this to search for teams, scores etc.")
+	makeParagraph(document.body.childNodes[7], "Search for teams and results etc.")
 	makeInput(document.body.childNodes[7], "searchBar")
 	//makeButton(document.body.childNodes[7], "Search", "searchFunction()", 'button2')
 }
