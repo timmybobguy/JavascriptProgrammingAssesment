@@ -104,7 +104,7 @@ function makeInput(appendTo, id) {
 }
 
 function makeHeader(appendTo, text) {
-	var newHeader = document.createElement('h')
+	var newHeader = document.createElement('h1')
 	appendTo.appendChild(newHeader)
 	newHeader.innerHTML = text
 	return newHeader

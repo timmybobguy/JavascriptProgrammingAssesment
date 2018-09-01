@@ -35,15 +35,10 @@
 <aside>
 </aside>
 
-<footer>Footer</footer>
+<footer>
+</footer>
 
-
-<!--<button onclick="myFunction()">Click me</button>-->
 <body onload="onLoad()">
-
-
-
-
 <script>
 
 var the2018Games
@@ -61,13 +56,13 @@ function onLoad() {
 	addSelectOption(theSelect2, "Matches", 0, "Matches")
 	addSelectOption(theSelect2, "Pools", 1, "Pools")
 	addSelectOption(theSelect2, "Teams", 2, "Teams")
-	makeButton(document.body.childNodes[3], 'Update table', 'updateTables()', 'button1')
+	makeButton(document.body.childNodes[3], 'View table', 'updateTables()', 'button1')
 	makeParagraph(document.body.childNodes[7], "Search for teams and results etc.")
 	makeInput(document.body.childNodes[7], "searchBar")
 	//makeButton(document.body.childNodes[7], "Search", "searchFunction()", 'button2')
 
 	//Statistics menu
-	makeParagraph(document.body.childNodes[3], "Select the sport and team for statistics")
+	makeParagraph(document.body.childNodes[3], "Select a sport and team for their statistics")
 	theSelect3 = makeSelect(document.body.childNodes[3], "statisticsSelector1", "statisticsFunction1()")
 	addSelectOption(theSelect3, "")
 	for (var x = 0; x < the2018Games.allMySports.length; x++) {
@@ -90,14 +85,16 @@ function viewStatistics() {
 	sportNumber = document.getElementsByName(document.getElementById("statisticsSelector1").value)[0].id
 	teamNumber = document.getElementsByName(document.getElementById("statisticsSelector2").value)[0].id
 	theTeam = the2018Games.allMySports[sportNumber].allMyTeams[teamNumber]
-	makeHeader(document.body.childNodes[5], String(theTeam.name))
+	makeHeader(document.body.childNodes[5], theTeam.name + " (" + theTeam.shortName + ")")
 	winPercentage = ((theTeam.matchesWon / theTeam.matchesPlayed) * 100) + "%"
-	makeParagraph(document.body.childNodes[5], (String(theTeam.name + " have won " + winPercentage + " of their matches.")))
+	makeParagraph(document.body.childNodes[5], ("The " + String(document.getElementById("statisticsSelector1").value).bold() + " team of " + String(theTeam.name).bold() + " have won " + winPercentage.bold() + " of their matches."))
+	makeParagraph(document.body.childNodes[5], ("They have scored " + (String(theTeam.scoreFor)).bold() + " points over the course of the games."))
+	makeParagraph(document.body.childNodes[5], ("And they have had " + (String(theTeam.scoreAgainst)).bold() + " points scored against them."))
 
 }
 
 window.addEventListener('input', function (e) {
- //console.log("input event coming from this element:", e.target);
+ //console.log("input event from this element:", e.target);
  searchFunction()
 
 }, false);
@@ -134,7 +131,7 @@ function updateTables() {
 			//sportNumber = the2018Games.allMySports[allSportsValue - 1]
 			theTest = the2018Games.allMySports[allSportsValue - 1]
 			paraText = theTest.name
-			makeParagraph(document.body.childNodes[5], paraText)
+			makeHeader(document.body.childNodes[5], paraText)
 		}
 
 		theTable = makeTable(document.body.childNodes[5])
