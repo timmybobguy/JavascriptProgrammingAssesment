@@ -61,7 +61,7 @@ function onLoad() {
 	addSelectOption(theSelect2, "Matches", 0, "Matches")
 	addSelectOption(theSelect2, "Pools", 1, "Pools")
 	addSelectOption(theSelect2, "Teams", 2, "Teams")
-	makeButton(document.body.childNodes[3], 'Update table', 'secondFunction()', 'button1')
+	makeButton(document.body.childNodes[3], 'Update table', 'updateTables()', 'button1')
 	makeParagraph(document.body.childNodes[7], "Search for teams and results etc.")
 	makeInput(document.body.childNodes[7], "searchBar")
 	//makeButton(document.body.childNodes[7], "Search", "searchFunction()", 'button2')
@@ -69,18 +69,28 @@ function onLoad() {
 	//Statistics menu
 	makeParagraph(document.body.childNodes[3], "Select the sport and team for statistics")
 	theSelect3 = makeSelect(document.body.childNodes[3], "statisticsSelector1", "statisticsFunction1()")
+	addSelectOption(theSelect3, "")
 	for (var x = 0; x < the2018Games.allMySports.length; x++) {
 	  addSelectOption(theSelect3, the2018Games.allMySports[x].name, x, the2018Games.allMySports[x].name)
   }
 	theSelect4 = makeSelect(document.body.childNodes[3], "statisticsSelector2")
-
+	makeButton(document.body.childNodes[3], "View statistics", "viewStatistics()", "button2")
 }
 
 function statisticsFunction1() {
 	removeOptions(document.getElementById("statisticsSelector2"))
-	for (var i = 0; i < the2018Games.allMySports.length; i++) {
-		addSelectOption(document.getElementById("statisticsSelector2"), the2018Games.allMySports[i])
+	sportNumber = document.getElementsByName(document.getElementById("statisticsSelector1").value)[0].id
+	for (var i = 0; i < the2018Games.allMySports[sportNumber].allMyTeams.length; i++) {
+		addSelectOption(document.getElementById("statisticsSelector2"), the2018Games.allMySports[sportNumber].allMyTeams[i].name, i, the2018Games.allMySports[sportNumber].allMyTeams[i].name)
 	}
+}
+
+function viewStatistics() {
+	document.body.childNodes[5].innerHTML = ""
+	sportNumber = document.getElementsByName(document.getElementById("statisticsSelector1").value)[0].id
+	teamNumber = document.getElementsByName(document.getElementById("statisticsSelector2").value)[0].id
+	makeParagraph(document.body.childNodes[5], String(the2018Games.allMySports[sportNumber].allMyTeams[teamNumber].name))
+
 }
 
 window.addEventListener('input', function (e) {
@@ -99,7 +109,7 @@ function searchFunction() {
   	}
   }
 }
-function secondFunction() {
+function updateTables() {
 	document.body.childNodes[5].innerHTML = ""
 	sport = String(document.getElementById("sportSelector").value)
 	selection = String(document.getElementById("secondSelector").value)
