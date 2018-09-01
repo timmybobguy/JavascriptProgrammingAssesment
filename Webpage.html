@@ -86,7 +86,7 @@ function viewStatistics() {
 	teamNumber = document.getElementsByName(document.getElementById("statisticsSelector2").value)[0].id
 	theTeam = the2018Games.allMySports[sportNumber].allMyTeams[teamNumber]
 	makeHeader(document.body.childNodes[5], theTeam.name + " (" + theTeam.shortName + ")")
-	winPercentage = ((theTeam.matchesWon / theTeam.matchesPlayed) * 100) + "%"
+	winPercentage = String(Math.round(((theTeam.matchesWon / theTeam.matchesPlayed) * 100) * 100) / 100) + "%"
 	makeParagraph(document.body.childNodes[5], ("The " + String(document.getElementById("statisticsSelector1").value).bold() + " team of " + String(theTeam.name).bold() + " have won " + winPercentage.bold() + " of their matches."))
 	makeParagraph(document.body.childNodes[5], ("They have scored " + (String(theTeam.scoreFor)).bold() + " points over the course of the games."))
 	makeParagraph(document.body.childNodes[5], ("And they have had " + (String(theTeam.scoreAgainst)).bold() + " points scored against them."))
