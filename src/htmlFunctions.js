@@ -102,3 +102,10 @@ function makeInput(appendTo, id) {
 	newInput.setAttribute("id", id)
 	return newInput
 }
+
+function makeHeader(appendTo, text) {
+	var newHeader = document.createElement('h')
+	appendTo.appendChild(newHeader)
+	newHeader.innerHTML = text
+	return newHeader
+}
