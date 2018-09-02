@@ -102,6 +102,7 @@ h1 {
   margin-bottom: 1em;
   font-size: 1.3em;
   font-weight: bold;
+  padding: 15px;
 }
 select {
   width: 100px;

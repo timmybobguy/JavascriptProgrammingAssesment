@@ -17,8 +17,13 @@
   <script src="src/addPoolResults.js"></script>
   <script src="src/shortNames.js"></script>
 	<link rel="stylesheet" href="src/stylesheet.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<!-- .................... -->
 </head>
+
+<script type = "text/javascript">
+	 google.charts.load('current', {packages: ['corechart']});
+</script>
 
 <body class="container">
 
@@ -71,6 +76,7 @@ function onLoad() {
   }
 	theSelect4 = makeSelect(document.body.childNodes[3], "statisticsSelector2")
 	makeButton(document.body.childNodes[3], "View statistics", "viewStatistics()", "button2")
+
 }
 
 function statisticsFunction1() {
@@ -91,7 +97,28 @@ function viewStatistics() {
 	makeParagraph(document.body.childNodes[5], ("The " + String(document.getElementById("statisticsSelector1").value).bold() + " team of " + String(theTeam.name).bold() + " have won " + winPercentage.bold() + " of their matches."))
 	makeParagraph(document.body.childNodes[5], ("They have scored " + (String(theTeam.scoreFor)).bold() + " points over the course of the games."))
 	makeParagraph(document.body.childNodes[5], ("And they have had " + (String(theTeam.scoreAgainst)).bold() + " points scored against them."))
+	makeParagraph(document.body.childNodes[5], "", "piechart")
+	google.charts.setOnLoadCallback(drawChart)
+}
 
+// Draw the chart and set the chart values
+function drawChart() {
+	var data = google.visualization.arrayToDataTable([
+	['Task', 'Hours per Day'],
+	['Work', 8],
+	['Friends', 2],
+	['Eat', 2],
+	['TV', 2],
+	['Gym', 2],
+	['Sleep', 8]
+]);
+
+	// Optional; add a title and set the width and height of the chart
+	var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+	// Display the chart inside the <div> element with id="piechart"
+	var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+	chart.draw(data, options);
 }
 
 window.addEventListener('input', function (e) {

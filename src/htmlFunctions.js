@@ -4,9 +4,10 @@ function makeNewLine() {
 	br = document.createElement('br')
 	document.body.appendChild(br)
 }
-function makeParagraph(appendTo, pText) {
+function makeParagraph(appendTo, pText, id) {
 	var p = document.createElement('p')
 	appendTo.appendChild(p)
+	p.setAttribute("id", id)
 	p.innerHTML = pText
 	return p
 }
