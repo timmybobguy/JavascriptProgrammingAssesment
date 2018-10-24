@@ -98,10 +98,40 @@ function viewStatistics() {
 	makeParagraph(document.body.childNodes[5], ("They have scored " + (String(theTeam.scoreFor)).bold() + " points over the course of the games."))
 	makeParagraph(document.body.childNodes[5], ("And they have had " + (String(theTeam.scoreAgainst)).bold() + " points scored against them."))
 	makeParagraph(document.body.childNodes[5], "", "piechart")
-	google.charts.setOnLoadCallback(drawChart(theTeam))
+	google.charts.setOnLoadCallback(drawPieChart(theTeam))
+	createComparison(theTeam, sportNumber, winPercentage)
 }
 
-function drawChart(theTeam) {
+function createComparison(theTeam, sportNumber, winPercentage) {
+	test = document.getElementById('comparisonText')
+	if (test) {
+		removeElement('comparisonText')
+		removeOptions(document.getElementById("compareSelect"))
+	} else {
+		makeParagraph(document.body.childNodes[3], "-----------","space")
+		theSelect = makeSelect(document.body.childNodes[3], "compareSelect")
+		makeButton(document.body.childNodes[3], "Compare", "displayComparison()", "button3")
+	}
+	sportName = the2018Games.allMySports[sportNumber].name
+
+	makeParagraph(document.body.childNodes[3], "Compare " + String(theTeam).bold() + " with another team from " + String(sportName).bold(), "comparisonText")
+
+
+	for (var i = 0; i < the2018Games.allMySports[sportNumber].allMyTeams.length; i++) {
+		if (theTeam != the2018Games.allMySports[sportNumber].allMyTeams[i].name) {
+			addSelectOption(theSelect, the2018Games.allMySports[sportNumber].allMyTeams[i].name, i, the2018Games.allMySports[sportNumber].allMyTeams[i].name)
+		}
+	}
+}
+
+function displayComparison() {
+	theTeam = document.getElementById("statisticsSelector2").value
+	theTeam2 = document.getElementById("compareSelect").value
+	console.log(theTeam, theTeam2)
+
+}
+
+function drawPieChart(theTeam) {
 	var data = google.visualization.arrayToDataTable([
 	['Task', 'Points scored'],
 	['Points for', theTeam.scoreFor],
@@ -117,6 +147,7 @@ window.addEventListener('input', function (e) {
  searchFunction()
 
 }, false);
+
 
 function searchFunction() {
 	var searchString = document.getElementById('searchBar').value

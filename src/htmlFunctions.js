@@ -1,8 +1,6 @@
-function makeNewLine() {
+function makeNewLine(appendTo) {
 	var br = document.createElement('br')
-	document.body.appendChild(br)
-	br = document.createElement('br')
-	document.body.appendChild(br)
+	appendTo.appendChild(br)
 }
 function makeParagraph(appendTo, pText, id) {
 	var p = document.createElement('p')
