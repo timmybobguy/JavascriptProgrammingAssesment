@@ -125,9 +125,15 @@ function createComparison(theTeam, sportNumber, winPercentage) {
 }
 
 function displayComparison() {
+	for (var i = 0; i < the2018Games.allMySports.length; i++) {
+		if (the2018Games.allMySports[i].name == document.getElementById("statisticsSelector1").value) {
+			var theNumber = i
+		}
+	}
 	theTeam = document.getElementById("statisticsSelector2").value
 	theTeam2 = document.getElementById("compareSelect").value
 	console.log(theTeam, theTeam2)
+	drawLineChart(theNumber, theTeam, theTeam2)
 
 }
 
@@ -140,6 +146,44 @@ function drawPieChart(theTeam) {
 	var options = {'width':450, 'height':300, is3D: true,};
 	var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 	chart.draw(data, options);
+}
+
+function drawLineChart(sportNumber, team1, team2) {
+	array1 = []
+	array2 = []
+	for (var i = 0; i < the2018Games.allMySports[sportNumber].allMyMatches.length; i++) {
+		if (the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamA.name === team1) {
+			array1.push(the2018Games.allMySports[sportNumber].allMyMatches[i].scoreA)
+		} else if (the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamB.name === team1) {
+			array1.push(the2018Games.allMySports[sportNumber].allMyMatches[i].scoreB)
+		} else if (the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamA.name === team2) {
+			array2.push(the2018Games.allMySports[sportNumber].allMyMatches[i].scoreA)
+		} else if (the2018Games.allMySports[sportNumber].allMyMatches[i].myTeamB.name === team2) 	{
+			array2.push(the2018Games.allMySports[sportNumber].allMyMatches[i].scoreB)
+		}
+	}
+	maxLength = 0
+	if (array1.length > array2.length) {
+		maxLength = array1.length
+	} else {
+		maxLength = array2.length
+	}
+	console.log(array1, array2)
+	
+	dataOne = [['Date', team1, team2]]
+	for (var i = 0; i < maxLength; i++) {
+		dataOne.push([('Match ' + (i+1)), (array1[i]), (array2[i])])
+	}
+	var data = google.visualization.arrayToDataTable(dataOne)
+    var options = {
+		title: 'Team performance - Points scored',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+    };
+	makeParagraph(document.body.childNodes[5], "", "curve_chart")
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+    chart.draw(data, options);
 }
 
 window.addEventListener('input', function (e) {
@@ -243,7 +287,6 @@ function myFunction () { // eslint-disable-line no-unused-vars
 
 }
 */
-
 
 </script>
 </body>
