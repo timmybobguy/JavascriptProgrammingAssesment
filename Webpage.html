@@ -18,6 +18,7 @@
   <script src="src/shortNames.js"></script>
 	<link rel="stylesheet" href="src/stylesheet.css">
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<!-- .................... -->
 </head>
 
@@ -32,12 +33,24 @@
 </header>
 
 <nav>
+<div id="buttons">
+</div>
+<div id="nav1">
+<div id="compareContent" v-show="showCompare">
+
+</div>
+</div>
 </nav>
 
 <main>
 </main>
 
 <aside>
+
+<div id="aside1">
+<div id="asideContent" v-show="showSearch">
+</div>
+</div>
 </aside>
 
 <footer>
@@ -47,36 +60,51 @@
 <body onload="onLoad()">
 <script>
 
+var nav1 = new Vue({
+	el: '#nav1',
+	data: {
+		showCompare: false
+	}
+})
+
+var aside1 = new Vue({
+	el: '#aside1',
+	data: {
+		showSearch: false
+	}
+})
+
+
 var the2018Games
 the2018Games = Controller.setup()
 console.log( the2018Games )
 
 function onLoad() {
-	makeParagraph(document.body.childNodes[3], "Please select the options you want")
-	theSelect = makeSelect(document.body.childNodes[3], "sportSelector")
+	makeParagraph(document.getElementById("buttons"), "Please select the options you want")
+	theSelect = makeSelect(document.getElementById("buttons"), "sportSelector")
 	addSelectOption(theSelect, "All Sports", 'special')
   for (var x = 0; x < the2018Games.allMySports.length; x++) {
 	  addSelectOption(theSelect, the2018Games.allMySports[x].name, x, the2018Games.allMySports[x].name)
   }
-	theSelect2 = makeSelect(document.body.childNodes[3], "secondSelector")
+	theSelect2 = makeSelect(document.getElementById("buttons"), "secondSelector")
 	addSelectOption(theSelect2, "Matches", 0, "Matches")
 	addSelectOption(theSelect2, "Pools", 1, "Pools")
 	addSelectOption(theSelect2, "Teams", 2, "Teams")
-	makeButton(document.body.childNodes[3], 'View table', 'updateTables()', 'button1')
-	makeParagraph(document.body.childNodes[7], "Search for teams and results etc.")
-	makeInput(document.body.childNodes[7], "searchBar")
+	makeButton(document.getElementById("buttons"), 'View table', 'updateTables()', 'button1')
+	makeParagraph(document.getElementById("asideContent") , "Search for teams and results etc.")
+	makeInput(document.getElementById("asideContent"), "searchBar")
 	//makeButton(document.body.childNodes[7], "Search", "searchFunction()", 'button2')
 
 	//Statistics menu
-	makeParagraph(document.body.childNodes[3], "Select a sport and team for their statistics")
-	theSelect3 = makeSelect(document.body.childNodes[3], "statisticsSelector1", "statisticsFunction1()")
+	makeParagraph(document.getElementById("buttons"), "Select a sport and team for their statistics")
+	theSelect3 = makeSelect(document.getElementById("buttons"), "statisticsSelector1", "statisticsFunction1()")
 	addSelectOption(theSelect3, "")
 	for (var x = 0; x < the2018Games.allMySports.length; x++) {
 	  addSelectOption(theSelect3, the2018Games.allMySports[x].name, x, the2018Games.allMySports[x].name)
   }
-	theSelect4 = makeSelect(document.body.childNodes[3], "statisticsSelector2")
-	makeButton(document.body.childNodes[3], "View statistics", "viewStatistics()", "button2")
-
+	theSelect4 = makeSelect(document.getElementById("buttons"), "statisticsSelector2")
+	makeButton(document.getElementById("buttons"), "View statistics", "viewStatistics()", "button2")
+	makeButton(document.getElementById("buttons"), "View overview", "viewOverview()", "button4")
 }
 
 function statisticsFunction1() {
@@ -88,6 +116,7 @@ function statisticsFunction1() {
 }
 
 function viewStatistics() {
+	aside1.showSearch = false
 	document.body.childNodes[5].innerHTML = ""
 	sportNumber = document.getElementsByName(document.getElementById("statisticsSelector1").value)[0].id
 	teamNumber = document.getElementsByName(document.getElementById("statisticsSelector2").value)[0].id
@@ -108,13 +137,13 @@ function createComparison(theTeam, sportNumber, winPercentage) {
 		removeElement('comparisonText')
 		removeOptions(document.getElementById("compareSelect"))
 	} else {
-		makeParagraph(document.body.childNodes[3], "-----------","space")
-		theSelect = makeSelect(document.body.childNodes[3], "compareSelect")
-		makeButton(document.body.childNodes[3], "Compare", "displayComparison()", "button3")
+		makeParagraph(document.getElementById("compareContent"), "-----------","space")
+		theSelect = makeSelect(document.getElementById("compareContent"), "compareSelect")
+		makeButton(document.getElementById("compareContent"), "Compare", "displayComparison()", "button3")
 	}
 	sportName = the2018Games.allMySports[sportNumber].name
 
-	makeParagraph(document.body.childNodes[3], "Compare " + String(theTeam).bold() + " with another team from " + String(sportName).bold(), "comparisonText")
+	makeParagraph(document.getElementById("compareContent"), "Compare " + String(theTeam).bold() + " with another team from " + String(sportName).bold(), "comparisonText")
 
 
 	for (var i = 0; i < the2018Games.allMySports[sportNumber].allMyTeams.length; i++) {
@@ -122,6 +151,13 @@ function createComparison(theTeam, sportNumber, winPercentage) {
 			addSelectOption(theSelect, the2018Games.allMySports[sportNumber].allMyTeams[i].name, i, the2018Games.allMySports[sportNumber].allMyTeams[i].name)
 		}
 	}
+	nav1.showCompare = true
+}
+function viewOverview() {
+	document.body.childNodes[5].innerHTML = ""
+
+
+// Make a thing selecting a sport and then displaying a big chart comparing all the team + general statistics about the games e.g. how many games were played points scored etc.
 }
 
 function displayComparison() {
@@ -132,7 +168,7 @@ function displayComparison() {
 	}
 	theTeam = document.getElementById("statisticsSelector2").value
 	theTeam2 = document.getElementById("compareSelect").value
-	console.log(theTeam, theTeam2)
+
 	drawLineChart(theNumber, theTeam, theTeam2)
 
 }
@@ -168,7 +204,7 @@ function drawLineChart(sportNumber, team1, team2) {
 	} else {
 		maxLength = array2.length
 	}
-	console.log(array1, array2)
+
 
 	dataOne = [['Date', team1, team2]]
 	for (var i = 0; i < maxLength; i++) {
@@ -204,6 +240,8 @@ function searchFunction() {
   }
 }
 function updateTables() {
+	aside1.showSearch = true
+	nav1.showCompare = false
 	document.body.childNodes[5].innerHTML = ""
 	sport = String(document.getElementById("sportSelector").value)
 	selection = String(document.getElementById("secondSelector").value)
@@ -251,43 +289,6 @@ function updateTables() {
 		allSportsValue -= 1
 	}
 }
-// This is what you would use to create a search engine: window.find(string), also get the POOL RESULTS. Also consider adding Team statistics with another selector, picking team and then displaying team wins losses etc using graphics.
-/*
-SEARCH THINGYYYY ------> document.getElementsByTagName('td')
-removeElement("button1")
-removeElement("para1")
-removeElement("sportSelector")
-removeElement("secondSelector")
-
-
-if (document.getElementById("sportSelector").idea === "special") {
-	console.log('testttttt')
-} else {
-
-}
-*/
-
-
-
-/*
-Table requires id
-// called from a button click or load of a document
-function myFunction () { // eslint-disable-line no-unused-vars
-  var theTable
-  theTable = makeTable(document.body)
-  addTableHeaders(theTable, 'ID', 'Grade')
-  addTableData(theTable, '123123', '100')
-  addTableData(theTable, '987654', '56')
-  addTableData(theTable, '1231234', '34')
-	theSelect = makeSelect(document.body)
-	addSelectOption(theSelect, 'Test')
-	addSelectOption(theSelect, 'Test1')
-	addSelectOption(theSelect, 'Test2')
-	addSelectOption(theSelect, 'Test3')
-
-}
-*/
-
 </script>
 </body>
 </html>
