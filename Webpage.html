@@ -154,7 +154,17 @@ function createComparison(theTeam, sportNumber, winPercentage) {
 	nav1.showCompare = true
 }
 function viewOverview() {
+	aside1.showSearch = false
+	nav1.showCompare = false
 	document.body.childNodes[5].innerHTML = ""
+	makeDiv(document.body.childNodes[5], "overview1")
+	makeParagraph(document.getElementById("overview1"), "test1")
+	makeDiv(document.body.childNodes[5], "overview2")
+	makeParagraph(document.getElementById("overview2"), "test2")
+
+	document.body.childNodes[5].style.display = "grid"
+	document.getElementById("overview2").style.gridColumn = 3
+
 
 
 // Make a thing selecting a sport and then displaying a big chart comparing all the team + general statistics about the games e.g. how many games were played points scored etc.
@@ -204,8 +214,6 @@ function drawLineChart(sportNumber, team1, team2) {
 	} else {
 		maxLength = array2.length
 	}
-
-
 	dataOne = [['Date', team1, team2]]
 	for (var i = 0; i < maxLength; i++) {
 		dataOne.push([('Match ' + (i+1)), (array1[i]), (array2[i])])

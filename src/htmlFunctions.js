@@ -2,6 +2,12 @@ function makeNewLine(appendTo) {
 	var br = document.createElement('br')
 	appendTo.appendChild(br)
 }
+function makeDiv(appendTo, id) {
+	var div = document.createElement("div")
+	appendTo.appendChild(div)
+	div.setAttribute("id", id)
+	return div
+}
 function makeParagraph(appendTo, pText, id) {
 	var p = document.createElement('p')
 	appendTo.appendChild(p)
