@@ -153,18 +153,33 @@ function createComparison(theTeam, sportNumber, winPercentage) {
 	}
 	nav1.showCompare = true
 }
+
 function viewOverview() {
 	aside1.showSearch = false
 	nav1.showCompare = false
 	document.body.childNodes[5].innerHTML = ""
 	makeDiv(document.body.childNodes[5], "overview1")
-	makeParagraph(document.getElementById("overview1"), "test1")
+	//makeParagraph(document.getElementById("overview1"), "test1")
 	makeDiv(document.body.childNodes[5], "overview2")
-	makeParagraph(document.getElementById("overview2"), "test2")
-
+	//makeParagraph(document.getElementById("overview2"), "test2")
 	document.body.childNodes[5].style.display = "grid"
-	document.getElementById("overview2").style.gridColumn = 3
+	document.getElementById("overview2").style.gridColumn = 2
 
+
+	timeLasted = []
+	for (var i = 0; i < the2018Games.allMySports.length; i++) {
+		for (var a = 0; a < the2018Games.allMySports[i].allMyMatches.length; a++) {
+			if (timeLasted.includes(the2018Games.allMySports[i].allMyMatches[a].when)) {
+				console.log("test")
+			} else {
+				timeLasted.push(the2018Games.allMySports[i].allMyMatches[a].when)
+			}
+		}
+	}
+	makeParagraph(document.getElementById("overview1"), "The event lasted: ")
+	makeParagraph(document.getElementById("overview1"), +"sports were played")
+	makeParagraph(document.getElementById("overview1"), + " matches were played")
+	makeParagraph(document.getElementById("overview1"), "And a total of " + + " points were scored")
 
 
 // Make a thing selecting a sport and then displaying a big chart comparing all the team + general statistics about the games e.g. how many games were played points scored etc.
