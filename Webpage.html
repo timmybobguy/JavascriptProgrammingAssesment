@@ -116,6 +116,12 @@ function statisticsFunction1() {
 }
 
 function viewStatistics() {
+	var element =  document.getElementById('overview1');
+	if (typeof(element) != 'undefined' && element != null) {
+		removeElement("overview1")
+		removeElement("overview2")
+		document.body.childNodes[5].style.display = "block"
+	}
 	aside1.showSearch = false
 	document.body.childNodes[5].innerHTML = ""
 	sportNumber = document.getElementsByName(document.getElementById("statisticsSelector1").value)[0].id
@@ -164,25 +170,50 @@ function viewOverview() {
 	//makeParagraph(document.getElementById("overview2"), "test2")
 	document.body.childNodes[5].style.display = "grid"
 	document.getElementById("overview2").style.gridColumn = 2
-
-
 	timeLasted = []
 	for (var i = 0; i < the2018Games.allMySports.length; i++) {
 		for (var a = 0; a < the2018Games.allMySports[i].allMyMatches.length; a++) {
-			if (timeLasted.includes(the2018Games.allMySports[i].allMyMatches[a].when)) {
-				console.log("test")
-			} else {
-				timeLasted.push(the2018Games.allMySports[i].allMyMatches[a].when)
-			}
+			timeLasted.push(the2018Games.allMySports[i].allMyMatches[a].when)
 		}
 	}
-	makeParagraph(document.getElementById("overview1"), "The event lasted: ")
-	makeParagraph(document.getElementById("overview1"), +"sports were played")
-	makeParagraph(document.getElementById("overview1"), + " matches were played")
-	makeParagraph(document.getElementById("overview1"), "And a total of " + + " points were scored")
-
-
+	oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+	firstDate = new Date(timeLasted[0])
+	secondDate = new Date(timeLasted.pop())
+	diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+	makeParagraph(document.getElementById("overview1"), "The event lasted: " + String(diffDays + " days").bold())
+	
+	sportNumber = the2018Games.allMySports.length
+	makeParagraph(document.getElementById("overview1"), String(sportNumber).bold() +" sports were played")
+	
+	makeParagraph(document.getElementById("overview1"), String(timeLasted.length).bold() + " matches were played")
+	
+	totalPoints = []
+	for (var i = 0; i < the2018Games.allMySports.length; i++) {
+		for (var a = 0; a < the2018Games.allMySports[i].allMyMatches.length; a++) {
+			totalPoints.push(the2018Games.allMySports[i].allMyMatches[a].scoreA)
+		}
+	}
+	var sum = totalPoints.reduce((a, b) => a + b, 0);
+	makeParagraph(document.getElementById("overview1"), "And a total of " + String(sum).bold() + " points were scored")
+	
+	theSelect = makeSelect(document.getElementById("overview2"), "overviewSelector")
+	for (var i = 0; i < the2018Games.allMySports.length; i++) {
+		addSelectOption(theSelect, the2018Games.allMySports[i].name, i, the2018Games.allMySports[i].name) 
+	}
+	
+	
+	
 // Make a thing selecting a sport and then displaying a big chart comparing all the team + general statistics about the games e.g. how many games were played points scored etc.
+}
+function drawBarChart(theSport) {
+	var data = google.visualization.arrayToDataTable([
+		['Team', 'Points scored'],
+		['Test1', 1],
+		['Test2', 5]
+	]);
+	makeDiv(0
+	var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+	chart.draw(data, options);
 }
 
 function displayComparison() {
@@ -195,7 +226,7 @@ function displayComparison() {
 	theTeam2 = document.getElementById("compareSelect").value
 
 	drawLineChart(theNumber, theTeam, theTeam2)
-
+	
 }
 
 function drawPieChart(theTeam) {
@@ -263,6 +294,12 @@ function searchFunction() {
   }
 }
 function updateTables() {
+	var element =  document.getElementById('overview1');
+	if (typeof(element) != 'undefined' && element != null) {
+		removeElement("overview1")
+		removeElement("overview2")
+		document.body.childNodes[5].style.display = "block"
+	}
 	aside1.showSearch = true
 	nav1.showCompare = false
 	document.body.childNodes[5].innerHTML = ""
