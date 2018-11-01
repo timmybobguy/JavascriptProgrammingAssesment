@@ -169,7 +169,7 @@ function viewOverview() {
 	makeDiv(document.body.childNodes[5], "overview2")
 	//makeParagraph(document.getElementById("overview2"), "test2")
 	document.body.childNodes[5].style.display = "grid"
-	document.getElementById("overview2").style.gridColumn = 2
+	document.getElementById("overview2").style.gridColumn = 2 / 3
 	timeLasted = []
 	for (var i = 0; i < the2018Games.allMySports.length; i++) {
 		for (var a = 0; a < the2018Games.allMySports[i].allMyMatches.length; a++) {
@@ -195,25 +195,28 @@ function viewOverview() {
 	}
 	var sum = totalPoints.reduce((a, b) => a + b, 0);
 	makeParagraph(document.getElementById("overview1"), "And a total of " + String(sum).bold() + " points were scored")
+	makeNewLine(document.getElementById("overview1"))
 	
-	theSelect = makeSelect(document.getElementById("overview2"), "overviewSelector")
+	theSelect = makeSelect(document.getElementById("overview1"), "overviewSelector")
 	for (var i = 0; i < the2018Games.allMySports.length; i++) {
 		addSelectOption(theSelect, the2018Games.allMySports[i].name, i, the2018Games.allMySports[i].name) 
 	}
+	makeButton(document.getElementById("overview1"), "Generate graph", "drawBarChart()", "button5")
 	
 	
 	
 // Make a thing selecting a sport and then displaying a big chart comparing all the team + general statistics about the games e.g. how many games were played points scored etc.
 }
-function drawBarChart(theSport) {
-	var data = google.visualization.arrayToDataTable([
-		['Team', 'Points scored'],
-		['Test1', 1],
-		['Test2', 5]
-	]);
-	makeDiv(0
-	var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
-	chart.draw(data, options);
+function drawBarChart() {
+	theSport = document.getElementsByName(document.getElementById("overviewSelector").value)[0].id
+	dataOne = [['Team', 'Points scored', 'Points against']]	
+	for (var i = 0; i < the2018Games.allMySports[theSport].allMyTeams.length; i++) {
+	
+		dataOne.push([the2018Games.allMySports[theSport].allMyTeams[i].name, the2018Games.allMySports[theSport].allMyTeams[i].scoreFor, the2018Games.allMySports[theSport].allMyTeams[i].scoreAgainst])
+	}
+	var data = google.visualization.arrayToDataTable(dataOne)
+	var chart = new google.visualization.ColumnChart(document.getElementById('overview2'));
+	chart.draw(data);
 }
 
 function displayComparison() {
